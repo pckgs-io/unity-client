@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3f7fc49515da7f340b6d3d62e3377b77
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_ViewDataDictionary: {instanceID: 0}
+  - accessUIAsset: {fileID: 9197481963319205126, guid: f7c2004f87508a041a8d60a80bbf55b8, type: 3}
+  - accessTokenUIAsset: {fileID: 9197481963319205126, guid: 83fa5b5fc6cebe04a9174f7057afff13, type: 3}
+  - newTokenUIAsset: {fileID: 9197481963319205126, guid: 76f90d5167a86fb418353f936b9c6951, type: 3}
+  - boolDialogUIAsset: {fileID: 9197481963319205126, guid: f9d5c3a4110240d41802de29883a4a0a, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

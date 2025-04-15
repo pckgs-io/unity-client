@@ -1,0 +1,8 @@
+{
+    "name": "io.pckgs.unity-client",
+    "version": "0.0.1",
+    "displayName": "pckgs.io",
+    "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.2.1"
+    }
+}

@@ -1,0 +1,26 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Package/Editor/UI/Styles.uss?fileID=7433441132597879392&amp;guid=ed688e8c93991df45aeb5d8b0a87d3b1&amp;type=3#Styles" />
+    <engine:VisualElement class="m" style="flex-grow: 0;">
+        <Pckgs.Spinner name="LoadingIndicator" style="width: 20px; height: 20px; display: flex; align-self: center;" />
+        <engine:VisualElement name="Content" style="flex-grow: 1; flex-direction: row;">
+            <engine:VisualElement style="flex-grow: 1; justify-content: center;">
+                <engine:Label text="Label" name="Error" style="color: rgb(255, 0, 0);" />
+                <engine:VisualElement name="TokenContent" style="flex-grow: 0; flex-direction: column; align-items: stretch; display: none;">
+                    <engine:Label text="Label" name="NameLabel" class="h pHalf" style="padding-top: 0; padding-right: 0; padding-left: 0;" />
+                    <engine:VisualElement name="DetailsContent" style="flex-grow: 1; flex-direction: row;">
+                        <engine:Label text="Access on " class="pHalf" style="padding-top: 0; padding-bottom: 0; padding-left: 0; -unity-text-align: middle-left;" />
+                        <engine:VisualElement name="OrgContent" class="pHalf round link" style="flex-grow: 0; flex-direction: row; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255);">
+                            <engine:VisualElement name="OrgLogo" class="round mHalf" style="display: flex; margin-top: 0; margin-bottom: 0; margin-left: 0;" />
+                            <engine:Label name="OrgName" text="asd" style="-unity-font-style: bold;" />
+                        </engine:VisualElement>
+                    </engine:VisualElement>
+                </engine:VisualElement>
+            </engine:VisualElement>
+            <engine:VisualElement name="Actions" style="flex-grow: 0;">
+                <engine:Button text="Remove Token" name="RemoveButton" class="destructive round pHalf" style="align-self: center;" />
+                <engine:Button text="&lt;u&gt;Install Registry&lt;/u&gt;" name="RegistryButton" class="link p link-destructive" style="padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+    <engine:VisualElement name="Separator" />
+</engine:UXML>

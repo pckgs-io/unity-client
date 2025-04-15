@@ -1,0 +1,225 @@
+:root {
+    --spacingHalf: 5px;
+    --spacing: 10px;
+    --spacing2: 20px;
+    --spacing3: 30px;
+    --spacing4: 40px;
+    --roundness: 5px;
+    --roundness2: 10px;
+    --roundness3: 15px;
+    --roundness4: 20px;
+    --header: 18px;
+    --header2: 22px;
+    --header3: 24px;
+    --header4: 28px;
+    --text-size: 14px;
+}
+
+#Separator {
+    height: 1px;
+    background-color: rgb(70, 70, 70);
+    flex-grow: 0;
+}
+
+.h {
+    font-size: var(--header);
+}
+
+.h2 {
+    font-size: var(--header2);
+}
+
+.h3 {
+    font-size: var(--header3);
+}
+
+.destructive {
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(255, 0, 0);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgb(255, 0, 0);
+    border-right-color: rgb(255, 0, 0);
+    border-top-color: rgb(255, 0, 0);
+    border-bottom-color: rgb(255, 0, 0);
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+.h4 {
+    font-size: var(--header4);
+}
+
+.pHalf {
+    padding-top: var(--spacingHalf);
+    padding-right: var(--spacingHalf);
+    padding-bottom: var(--spacingHalf);
+    padding-left: var(--spacingHalf);
+}
+
+.p {
+    padding-top: var(--spacing);
+    padding-right: var(--spacing);
+    padding-bottom: var(--spacing);
+    padding-left: var(--spacing);
+}
+
+.p2 {
+    padding-top: var(--spacing2);
+    padding-right: var(--spacing2);
+    padding-bottom: var(--spacing2);
+    padding-left: var(--spacing2);
+}
+
+.p3 {
+    padding-top: var(--spacing3);
+    padding-right: var(--spacing3);
+    padding-bottom: var(--spacing3);
+    padding-left: var(--spacing3);
+}
+
+.p4 {
+    padding-top: var(--spacing4);
+    padding-right: var(--spacing4);
+    padding-bottom: var(--spacing4);
+    padding-left: var(--spacing4);
+}
+
+.mHalf {
+    margin-top: var(--spacingHalf);
+    margin-right: var(--spacingHalf);
+    margin-bottom: var(--spacingHalf);
+    margin-left: var(--spacingHalf);
+}
+
+.m {
+    margin-top: var(--spacing);
+    margin-right: var(--spacing);
+    margin-bottom: var(--spacing);
+    margin-left: var(--spacing);
+}
+
+.m2 {
+    margin-top: var(--spacing2);
+    margin-right: var(--spacing2);
+    margin-bottom: var(--spacing2);
+    margin-left: var(--spacing2);
+}
+
+.m2 {
+    margin-top: var(--spacing3);
+    margin-right: var(--spacing3);
+    margin-bottom: var(--spacing3);
+    margin-left: var(--spacing3);
+}
+
+.m4 {
+    margin-top: var(--spacing4);
+    margin-right: var(--spacing4);
+    margin-bottom: var(--spacing4);
+    margin-left: var(--spacing4);
+}
+
+Label {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    white-space: normal;
+}
+
+Button {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
+.panel {
+    background-color: var(--unity-background);
+}
+
+.round {
+    border-top-left-radius: var(--roundness);
+    border-top-right-radius: var(--roundness);
+    border-bottom-right-radius: var(--roundness);
+    border-bottom-left-radius: var(--roundness);
+}
+
+.round2 {
+    border-top-left-radius: var(--roundness2);
+    border-top-right-radius: var(--roundness2);
+    border-bottom-right-radius: var(--roundness2);
+    border-bottom-left-radius: var(--roundness2);
+}
+
+.round3 {
+    border-top-left-radius: var(--roundness3);
+    border-top-right-radius: var(--roundness3);
+    border-bottom-right-radius: var(--roundness3);
+    border-bottom-left-radius: var(--roundness3);
+}
+
+.round4 {
+    border-top-left-radius: var(--roundness4);
+    border-top-right-radius: var(--roundness4);
+    border-bottom-right-radius: var(--roundness4);
+    border-bottom-left-radius: var(--roundness4);
+}
+
+Spinner {
+    width: 30px;
+    height: 30px;
+}
+
+.destructive:hover {
+    background-color: rgba(255, 0, 0, 0.39);
+    color: rgb(255, 255, 255);
+}
+
+.link:hover {
+    color: rgb(0, 160, 255);
+}
+
+.link {
+    color: rgb(0, 127, 255);
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
+.link-destructive {
+    color: rgb(255, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.link-destructive:hover {
+    color: rgb(202, 54, 54);
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
