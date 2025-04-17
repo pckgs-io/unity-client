@@ -9,7 +9,7 @@ namespace Pckgs
     {
         public static T CloneTree<T>(this VisualTreeAsset asset, VisualElement target) where T : UIController
         {
-            asset.CloneTree(target);
+            asset.CloneTree(target.contentContainer);
             return (T)Activator.CreateInstance(typeof(T), target);
         }
     }

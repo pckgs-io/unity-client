@@ -5,10 +5,16 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - m_ViewDataDictionary: {instanceID: 0}
+  - iconAsset: {fileID: 2800000, guid: 39d2ac0df5686194789f13a8a2d31fab, type: 3}
+  - windowUIAsset: {fileID: 9197481963319205126, guid: b08c000eba9276f42a731e8cf66aa38a, type: 3}
   - accessUIAsset: {fileID: 9197481963319205126, guid: f7c2004f87508a041a8d60a80bbf55b8, type: 3}
   - accessTokenUIAsset: {fileID: 9197481963319205126, guid: 83fa5b5fc6cebe04a9174f7057afff13, type: 3}
   - newTokenUIAsset: {fileID: 9197481963319205126, guid: 76f90d5167a86fb418353f936b9c6951, type: 3}
+  - uploadUIAsset: {fileID: 9197481963319205126, guid: b59366ca41b6616409b8e65613d87c52, type: 3}
+  - packageUIAsset: {fileID: 9197481963319205126, guid: bfcf2008a88195d42b78360d3969b8f1, type: 3}
   - boolDialogUIAsset: {fileID: 9197481963319205126, guid: f9d5c3a4110240d41802de29883a4a0a, type: 3}
+  - pickerUIAsset: {fileID: 9197481963319205126, guid: c6edb73dccd28264aa92a7e303ed8351, type: 3}
+  - pickerOptionUIAsset: {fileID: 9197481963319205126, guid: 09add387a067ac14ca1a3c48894c9d07, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

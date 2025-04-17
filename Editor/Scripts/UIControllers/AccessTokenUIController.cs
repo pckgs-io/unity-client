@@ -9,6 +9,7 @@ namespace Pckgs
     public class AccessTokenUIController : UIController, IBindable<string>, IBindable<AccessTokenDetails>
     {
         public Label NameLabel { get; private set; }
+        public Label ExpirationLabel { get; private set; }
         public Spinner LoadingIndicator { get; private set; }
         public VisualElement TokenContent { get; private set; }
         public VisualElement Content { get; private set; }
@@ -75,11 +76,12 @@ namespace Pckgs
             DetailsError = target.Q<Label>("Error");
             RemoveButton = target.Q<Button>("RemoveButton");
             RegistryButton = target.Q<Button>("RegistryButton");
+            ExpirationLabel = target.Q<Label>("ExpirationLabel");
 
             var orgContent = target.Q<VisualElement>("OrgContent");
             orgContent.RegisterCallback<ClickEvent>(e =>
             {
-                Application.OpenURL(Settings.WebUrl + "/organizations/" + AccessTokenDetails.OrganizationSlug);
+                Application.OpenURL(Navigation.OrganizationWebsite(AccessTokenDetails.OrganizationSlug));
             });
             OrgLogo.RegisterCallback<GeometryChangedEvent>(e =>
             {
@@ -112,7 +114,7 @@ namespace Pckgs
             RegistryButton.clicked += () =>
             {
                 if (string.IsNullOrEmpty(AccessTokenDetails.OrganizationSlug)) throw new ArgumentNullException(nameof(AccessTokenDetails.OrganizationSlug));
-                var url = Settings.EndPoint + "/" + AccessTokenDetails.OrganizationSlug;
+                var url = Navigation.OrganizationRegistry(AccessTokenDetails.OrganizationSlug);
                 var registry = PckgsWindow.ScopedRegistries.Data.FirstOrDefault(s => s.Url == url);
                 if (registry != null)
                 {
@@ -126,7 +128,7 @@ namespace Pckgs
                     registry = new UnityScopedRegistry
                     {
                         Name = AccessTokenDetails.OrganizationName,
-                        Url = Settings.EndPoint + "/" + AccessTokenDetails.OrganizationSlug,
+                        Url = url,
                         Scopes = new List<string> { "*" }
                     };
                     PckgsWindow.ScopedRegistries.Add(registry);
@@ -146,7 +148,8 @@ namespace Pckgs
 
         void RefreshRegistryButtonUI()
         {
-            var registry = PckgsWindow.ScopedRegistries.Data.FirstOrDefault(s => s.Url == Settings.EndPoint + "/" + AccessTokenDetails?.OrganizationSlug);
+            var registryUrl = Navigation.OrganizationRegistry(AccessTokenDetails.OrganizationSlug);
+            var registry = PckgsWindow.ScopedRegistries.Data.FirstOrDefault(s => s.Url == registryUrl);
             if (registry != null)
             {
                 RegistryButton.text = "<u>Remove Registry</u>";
@@ -188,12 +191,44 @@ namespace Pckgs
         public void Bind(AccessTokenDetails details)
         {
             RegistryButton.style.display = details != null ? DisplayStyle.Flex : DisplayStyle.None;
+
+            ExpirationLabel.style.display = details.AccessToken.ExpirationDate != null ? DisplayStyle.Flex : DisplayStyle.None;
+            if (details.AccessToken?.ExpirationDate != null)
+                ExpirationLabel.text = GetExpirationStatus(details.AccessToken.ExpirationDate.Value);
             Token = details.AccessToken.Token;
             AccessTokenDetails = details;
             NameLabel.text = details.AccessToken.Name;
             OrgNameLabel.text = $"<u>{details.OrganizationName}</u>";
             OrgLogoController.Bind(details.OrganizationLogo);
             RefreshRegistryButtonUI();
+        }
+
+        public string GetExpirationStatus(DateTime targetDateUtc)
+        {
+            // Calculate the difference between the target date and the current UTC date
+            TimeSpan timeLeft = targetDateUtc - DateTime.UtcNow;
+
+            // If the expiration date is in the future
+            if (timeLeft > TimeSpan.Zero)
+            {
+                // Calculate months and days
+                int monthsLeft = targetDateUtc.Month - DateTime.UtcNow.Month + 12 * (targetDateUtc.Year - DateTime.UtcNow.Year);
+                if (monthsLeft > 0)
+                {
+                    return $"Expires in {monthsLeft} month{(monthsLeft > 1 ? "s" : "")}";
+                }
+                else
+                {
+                    // Calculate remaining days if less than a month
+                    int daysLeft = (int)Math.Ceiling(timeLeft.TotalDays);
+                    return $"Expires in {daysLeft} day{(daysLeft > 1 ? "s" : "")}";
+                }
+            }
+            else
+            {
+                // If expired, return the expired message
+                return "Expired";
+            }
         }
     }
 

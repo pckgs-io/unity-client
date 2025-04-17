@@ -8,6 +8,7 @@ namespace Pckgs
     {
         public Label HeaderLabel { get; private set; }
         public Label DescriptionLabel { get; private set; }
+        public VisualElement ActionSpacing { get; private set; }
         public Button NegativeButton { get; private set; }
         public Button PositiveButton { get; private set; }
 
@@ -28,6 +29,7 @@ namespace Pckgs
         {
             HeaderLabel = target.Q<Label>("HeaderLabel");
             DescriptionLabel = target.Q<Label>("DescriptionLabel");
+            ActionSpacing = target.Q<VisualElement>("ActionSpacing");
             NegativeButton = target.Q<Button>("NegativeButton");
             PositiveButton = target.Q<Button>("PositiveButton");
             NegativeButton.clicked += () =>

@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -10,7 +8,7 @@ namespace Pckgs
 {
     public class PckgsApi
     {
-        public static string EndPoint => Settings.EndPoint;
+        public static string EndPoint => Navigation.Backend;
 
         public static async Task<Texture2D> GetTextureFile(FileData fileData)
         {
@@ -45,12 +43,12 @@ namespace Pckgs
                     if (request.result == UnityWebRequest.Result.Success)
                         completion.SetResult(extractor(request));
                     else if (request.result == UnityWebRequest.Result.ConnectionError)
-                        throw new Exception("Unable to connect to pckgs.io servers, make sure you have internet connection");
+                        throw new ApiConnectionException("Unable to connect to pckgs.io servers, make sure you have internet connection");
                     else
                     {
                         var responseText = request.downloadHandler.text;
                         var problem = JsonConvert.DeserializeObject<ProblemDefinition>(responseText);
-                        completion.SetException(new ApiException(problem));
+                        completion.SetException(new HttpException(problem));
                     }
                 }
                 catch (Exception e)

@@ -85,18 +85,18 @@ namespace Pckgs
                 {
                     Email = token.UserEmail,
                     Token = tokenInput,
-                    EndPoint = Settings.EndPoint + "/" + token.OrganizationSlug
+                    EndPoint = Navigation.Backend + "/" + token.OrganizationSlug
                 });
                 Close();
             }
-            catch (ApiException e)
+            catch (HttpException e)
             {
                 if (e.Problem.Status == 400 && (e.Problem.Errors?.TryGetValue("token", out var apiError) ?? false))
                     Error = string.Join(", ", apiError);
                 else
                     Error = e.Problem.Detail ?? e.Problem.Title;
             }
-            catch (Exception e)
+            catch (ApiConnectionException e)
             {
                 Error = e.Message;
             }

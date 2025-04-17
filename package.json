@@ -2,6 +2,7 @@
     "name": "io.pckgs.unity-client",
     "version": "0.0.1",
     "displayName": "pckgs.io",
+    "description": "pckgs.io unity ui",
     "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.2.1"
     }

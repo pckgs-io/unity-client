@@ -12,6 +12,7 @@ namespace Pckgs
 
         public virtual void Close()
         {
+            Dispose();
             OnClosed?.Invoke();
         }
     }

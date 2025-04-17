@@ -37,6 +37,12 @@ namespace Pckgs
             NoTokenUI = target.Q<VisualElement>("NoToken");
             TokensUI = target.Q<VisualElement>("Tokens");
             TokenList = target.Q<ScrollView>("TokenList");
+            var accessDashboardLabel = target.Q<Label>("AccessDashboardLink");
+            accessDashboardLabel.RegisterCallback<ClickEvent>(e =>
+            {
+                if (e.target == accessDashboardLabel)
+                    Application.OpenURL(Navigation.AccessDashboardLink);
+            });
 
             var button = target.Q<Button>("AddButton");
             button.clicked += OnAddButtonClicked;
@@ -73,7 +79,7 @@ namespace Pckgs
 
         void RefreshUI()
         {
-            var tokens = PckgsWindow.UpmConfigs.Data.Where(r => r.EndPoint.StartsWith(Settings.EndPoint)).Select(r => r.Token);
+            var tokens = PckgsWindow.UpmConfigs.Data.Where(r => r.EndPoint.StartsWith(Navigation.Backend)).Select(r => r.Token);
             var hasContent = tokens.Any();
             NoTokenUI.style.display = hasContent ? DisplayStyle.None : DisplayStyle.Flex;
             TokensUI.style.display = hasContent ? DisplayStyle.Flex : DisplayStyle.None;
@@ -87,7 +93,7 @@ namespace Pckgs
             {
                 TokenList.Clear();
                 accessTokenUIElements.Clear();
-                var tokens = PckgsWindow.UpmConfigs.Data.Where(r => r.EndPoint.StartsWith(Settings.EndPoint)).Select(r => r.Token);
+                var tokens = PckgsWindow.UpmConfigs.Data.Where(r => r.EndPoint.StartsWith(Navigation.Backend)).Select(r => r.Token);
                 RefreshUI();
                 foreach (var token in tokens)
                 {

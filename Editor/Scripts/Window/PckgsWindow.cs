@@ -6,15 +6,27 @@ namespace Pckgs
 {
     public class PckgsWindow : EditorWindow
     {
+        [SerializeField] Texture2D iconAsset;
+
+        [SerializeField] VisualTreeAsset windowUIAsset;
         [SerializeField] VisualTreeAsset accessUIAsset;
         [SerializeField] VisualTreeAsset accessTokenUIAsset;
         [SerializeField] VisualTreeAsset newTokenUIAsset;
+        [SerializeField] VisualTreeAsset uploadUIAsset;
+        [SerializeField] VisualTreeAsset packageUIAsset;
         [SerializeField] VisualTreeAsset boolDialogUIAsset;
+        [SerializeField] VisualTreeAsset pickerUIAsset;
+        [SerializeField] VisualTreeAsset pickerOptionUIAsset;
+
 
         public static VisualTreeAsset AccessUIAsset => Instance.accessUIAsset;
         public static VisualTreeAsset AccessTokenUIAsset => Instance.accessTokenUIAsset;
+        public static VisualTreeAsset UploadUIAsset => Instance.uploadUIAsset;
+        public static VisualTreeAsset PackageUIAsset => Instance.packageUIAsset;
         public static VisualTreeAsset NewTokenUIAsset => Instance.newTokenUIAsset;
         public static VisualTreeAsset BoolDialogUIAsset => Instance.boolDialogUIAsset;
+        public static VisualTreeAsset PickerUIAsset => Instance.pickerUIAsset;
+        public static VisualTreeAsset PickerOptionUIAsset => Instance.pickerOptionUIAsset;
 
         public static UpmConfigRecordCollection UpmConfigs { get; private set; }
         public static UnityScopedRegistryCollection ScopedRegistries { get; private set; }
@@ -28,23 +40,26 @@ namespace Pckgs
                 if (_instance == null)
                 {
                     _instance = GetWindow<PckgsWindow>();
-                    _instance.titleContent = new GUIContent("pckgs.io");
+                    _instance.titleContent = new GUIContent("pckgs.io", _instance.iconAsset);
                 }
                 return _instance;
             }
         }
-
+        private UIController windowUIController;
         [MenuItem("Window/pckgs.io")]
         public static void OpenWindow()
         {
             var instance = Instance;
         }
-
         public void CreateGUI()
         {
             ScopedRegistries = UnityScopedRegistryCollection.Load();
             UpmConfigs = UpmConfigRecordCollection.Load();
-            accessUIAsset.CloneTree<AccessUIController>(rootVisualElement);
+            windowUIController = windowUIAsset.CloneTree<WindowUIController>(rootVisualElement);
+        }
+        private void OnDestroy()
+        {
+            windowUIController?.Dispose();
         }
 
         public static T ShowPopup<T>(VisualTreeAsset popupAsset) where T : PopupUIController

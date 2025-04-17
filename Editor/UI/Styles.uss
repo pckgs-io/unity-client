@@ -8,6 +8,7 @@
     --roundness2: 10px;
     --roundness3: 15px;
     --roundness4: 20px;
+    --smallTextSize: 12px;
     --header: 18px;
     --header2: 22px;
     --header3: 24px;
@@ -19,6 +20,10 @@
     height: 1px;
     background-color: rgb(70, 70, 70);
     flex-grow: 0;
+}
+
+.small-text {
+    font-size: var(--smallTextSize);
 }
 
 .h {
@@ -137,7 +142,8 @@ Label {
     padding-right: 0;
     padding-bottom: 0;
     padding-left: 0;
-    white-space: normal;
+    white-space: pre-wrap;
+    -unity-text-align: middle-left;
 }
 
 Button {
@@ -222,4 +228,20 @@ Spinner {
     border-right-width: 0;
     border-bottom-width: 0;
     border-left-width: 0;
+}
+
+#unity-tab__header-label {
+     padding-top: var(--spacing);
+    padding-right: var(--spacing);
+    padding-bottom: var(--spacing);
+    padding-left: var(--spacing);
+    font-size: var(--header);
+}
+
+#unity-tab__content-container {
+    flex-grow: 1;
+}
+
+#unity-tab-view__content-container {
+    flex-grow: 1;
 }

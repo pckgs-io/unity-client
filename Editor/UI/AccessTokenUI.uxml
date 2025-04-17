@@ -4,9 +4,12 @@
         <Pckgs.Spinner name="LoadingIndicator" style="width: 20px; height: 20px; display: flex; align-self: center;" />
         <engine:VisualElement name="Content" style="flex-grow: 1; flex-direction: row;">
             <engine:VisualElement style="flex-grow: 1; justify-content: center;">
-                <engine:Label text="Label" name="Error" style="color: rgb(255, 0, 0);" />
-                <engine:VisualElement name="TokenContent" style="flex-grow: 0; flex-direction: column; align-items: stretch; display: none;">
-                    <engine:Label text="Label" name="NameLabel" class="h pHalf" style="padding-top: 0; padding-right: 0; padding-left: 0;" />
+                <engine:Label text="Label" name="Error" style="color: rgb(255, 0, 0); display: none;" />
+                <engine:VisualElement name="TokenContent" style="flex-grow: 0; flex-direction: column; align-items: stretch; display: flex;">
+                    <engine:VisualElement name="Header" class="pHalf" style="flex-grow: 1; padding-top: 0; padding-right: 0; padding-left: 0; flex-direction: row; align-items: center;">
+                        <engine:Label text="Label" name="NameLabel" class="h p" style="padding-top: 0; padding-bottom: 0; padding-left: 0;" />
+                        <engine:Label text="No Expiration" name="ExpirationLabel" class="small-text" />
+                    </engine:VisualElement>
                     <engine:VisualElement name="DetailsContent" style="flex-grow: 1; flex-direction: row;">
                         <engine:Label text="Access on " class="pHalf" style="padding-top: 0; padding-bottom: 0; padding-left: 0; -unity-text-align: middle-left;" />
                         <engine:VisualElement name="OrgContent" class="pHalf round link" style="flex-grow: 0; flex-direction: row; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255);">

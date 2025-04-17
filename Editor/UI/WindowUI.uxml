@@ -1,0 +1,7 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Package/Editor/UI/Styles.uss?fileID=7433441132597879392&amp;guid=ed688e8c93991df45aeb5d8b0a87d3b1&amp;type=3#Styles" />
+    <engine:TabView name="TabView" style="flex-grow: 1;">
+        <engine:Tab label="Access" name="AccessTab" style="flex-grow: 1;" />
+        <engine:Tab label="Upload" name="UploadTab" style="flex-grow: 1;" />
+    </engine:TabView>
+</engine:UXML>
