@@ -53,6 +53,12 @@ namespace Pckgs
         }
         public void CreateGUI()
         {
+            if (windowUIAsset == null)
+            {
+                Close();
+                EditorApplication.delayCall += OpenWindow;
+            }
+
             ScopedRegistries = UnityScopedRegistryCollection.Load();
             UpmConfigs = UpmConfigRecordCollection.Load();
             windowUIController = windowUIAsset.CloneTree<WindowUIController>(rootVisualElement);

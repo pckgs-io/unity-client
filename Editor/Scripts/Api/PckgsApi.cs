@@ -10,6 +10,17 @@ namespace Pckgs
     {
         public static string EndPoint => Navigation.Backend;
 
+        public static async Task<UnityPackage> PublishPackage(string registrySlug, string metadata, byte[] tarball, string token)
+        {
+            var form = new WWWForm();
+            form.AddField("metadata", metadata);
+            form.AddBinaryData("packageFile", tarball, "package.tgz", "application/gzip");
+
+            var request = UnityWebRequest.Post(EndPoint + $"/{registrySlug}", form);
+            request.SetRequestHeader("Authorization", "Bearer: " + token);
+            return await Request<UnityPackage>(request);
+        }
+
         public static async Task<Texture2D> GetTextureFile(FileData fileData)
         {
             if (fileData == null) return null;
@@ -48,7 +59,7 @@ namespace Pckgs
                     {
                         var responseText = request.downloadHandler.text;
                         var problem = JsonConvert.DeserializeObject<ProblemDefinition>(responseText);
-                        completion.SetException(new HttpException(problem));
+                        throw new HttpException(problem);
                     }
                 }
                 catch (Exception e)

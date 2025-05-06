@@ -1,13 +1,12 @@
 using System;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Pckgs
 {
-
-    public class PackageUIController : UIController, IBindable<UnityPackage>
+    public class PackageUIController : UIController, IBindable<ProjectPackage>
     {
         public Label DisplayNameLabel { get; private set; }
         public Label NameLabel { get; private set; }
@@ -40,7 +39,7 @@ namespace Pckgs
             }
         }
 
-        private UnityPackage Package { get; set; }
+        private ProjectPackage Package { get; set; }
         public PackageUIController(VisualElement target) : base(target)
         {
             DisplayNameLabel = target.Q<Label>("DisplayNameLabel");
@@ -62,7 +61,7 @@ namespace Pckgs
             IsUploading = false;
         }
 
-        public void Bind(UnityPackage package)
+        public void Bind(ProjectPackage package)
         {
             Package = package;
             DisplayNameLabel.text = package.Metadata.DisplayName ?? package.Metadata.Name;
@@ -72,7 +71,7 @@ namespace Pckgs
             DescriptionLabel.style.visibility = string.IsNullOrEmpty(package.Metadata.Description) ? Visibility.Hidden : Visibility.Visible;
         }
 
-        async void Upload()
+        void Upload()
         {
             Error = null;
             IsUploading = false;
@@ -102,10 +101,38 @@ namespace Pckgs
             picker.Header = "Select Organization to Upload";
         }
 
-        async void UploadTo(AccessTokenDetails tokenDetails, UnityPackage package)
+        async void UploadTo(AccessTokenDetails tokenDetails, ProjectPackage package)
         {
-            IsUploading = false;
+            IsUploading = true;
+
+            try
+            {
+                var inputFolder = Path.GetDirectoryName(package.FullPath);
+                var outputFile = Path.Combine(Application.temporaryCachePath, package.Metadata.Name + "-" + package.Metadata.Version + ".tgz");
+                var packageJsonFile = Path.Combine(inputFolder, "package.json");
+
+                TarUtility.CreateTarGz(inputFolder, outputFile);
+                var tarball = File.ReadAllBytes(outputFile);
+                var metadata = File.ReadAllText(packageJsonFile);
+                Debug.Log("Publishing package " + package.Metadata.Name);
+                var unityPackage = await PckgsApi.PublishPackage(tokenDetails.OrganizationSlug, metadata, tarball, tokenDetails.AccessToken.Token);
+                Debug.Log("Published " + unityPackage.Id);
+            }
+            catch (HttpException e)
+            {
+                if (e.Problem.Errors != null)
+                {
+                    foreach (var error in e.Problem.Errors)
+                        Debug.LogError(string.Join(", ", error.Value));
+                }
+                else Debug.LogError(e.Problem.Title + " " + e.Problem.Detail);
+            }
+            finally
+            {
+                IsUploading = false;
+            }
         }
+
     }
 
 }

@@ -7,17 +7,17 @@ using UnityEngine;
 
 namespace Pckgs
 {
-    public class UnityPackageCollection : Collection<UnityPackage>
+    public class ProjectPackageCollection : Collection<ProjectPackage>
     {
-        public UnityPackageCollection(IEnumerable<UnityPackage> data) : base(data)
+        public ProjectPackageCollection(IEnumerable<ProjectPackage> data) : base(data)
         {
         }
 
-        public static UnityPackageCollection Load()
+        public static ProjectPackageCollection Load()
         {
             string[] guids = AssetDatabase.FindAssets("package t:TextAsset", new[] { "Assets" });
 
-            var list = new List<UnityPackage>();
+            var list = new List<ProjectPackage>();
             foreach (string guid in guids)
             {
                 string path = AssetDatabase.GUIDToAssetPath(guid);
@@ -34,7 +34,7 @@ namespace Pckgs
                         continue;
                     }
 
-                    list.Add(new UnityPackage
+                    list.Add(new ProjectPackage
                     {
                         Path = path,
                         Guid = guid,
@@ -43,7 +43,7 @@ namespace Pckgs
                 }
             }
 
-            return new UnityPackageCollection(list);
+            return new ProjectPackageCollection(list);
         }
 
     }

@@ -88,7 +88,7 @@ namespace Pckgs
                 packageUI.Dispose();
             packageUIControllers.Clear();
 
-            var packages = UnityPackageCollection.Load().Data;
+            var packages = ProjectPackageCollection.Load().Data;
             var hasContent = packages.Any();
             NoPackage.style.display = hasContent ? DisplayStyle.None : DisplayStyle.Flex;
             PackageContent.style.display = hasContent ? DisplayStyle.Flex : DisplayStyle.None;

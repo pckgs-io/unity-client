@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Pckgs
 {
-    public class UnityPackageManifest
+    public class ProjectPackageManifest
     {
         public List<UnityScopedRegistry> ScopedRegistries { get; set; }
 
@@ -25,11 +25,11 @@ namespace Pckgs
             var manifestJson = JsonConvert.SerializeObject(this, settings);
             File.WriteAllText(manifestPath, manifestJson);
         }
-        public static UnityPackageManifest LoadManifest()
+        public static ProjectPackageManifest LoadManifest()
         {
             string manifestPath = Path.Combine(Application.dataPath.Replace("/Assets", ""), "Packages", "manifest.json");
             var manifestJson = File.ReadAllText(manifestPath);
-            var manifest = JsonConvert.DeserializeObject<UnityPackageManifest>(manifestJson);
+            var manifest = JsonConvert.DeserializeObject<ProjectPackageManifest>(manifestJson);
             manifest.ScopedRegistries ??= new List<UnityScopedRegistry>();
             return manifest;
         }

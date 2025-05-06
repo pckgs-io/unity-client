@@ -1,12 +1,16 @@
-using UnityEngine;
+using System;
+using System.Collections.Generic;
 
 namespace Pckgs
 {
     public class UnityPackage
     {
-        public string FullPath => System.IO.Path.Combine(Application.dataPath, Path.Substring("Assets/".Length));
-        public string Path { get; set; }
-        public string Guid { get; set; }
-        public PackageMetadata Metadata { get; set; }
+        public string Id { get; set; }
+        public string OrganizationId { get; set; }
+        public string Name { get; set; }
+        public List<UnityPackageRelease> Releases { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public string CreatedBy { get; set; }
+        public List<UserRef> Contributors { get; set; }
     }
 }

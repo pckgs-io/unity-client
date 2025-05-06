@@ -115,6 +115,7 @@ namespace Pckgs
             {
                 if (string.IsNullOrEmpty(AccessTokenDetails.OrganizationSlug)) throw new ArgumentNullException(nameof(AccessTokenDetails.OrganizationSlug));
                 var url = Navigation.OrganizationRegistry(AccessTokenDetails.OrganizationSlug);
+                PckgsWindow.ScopedRegistries.Reload();
                 var registry = PckgsWindow.ScopedRegistries.Data.FirstOrDefault(s => s.Url == url);
                 if (registry != null)
                 {
@@ -139,11 +140,31 @@ namespace Pckgs
                 RefreshRegistryButtonUI();
             };
 
+            PckgsWindow.ScopedRegistries.OnDataAdded += OnScopedRegistryAdded;
+            PckgsWindow.ScopedRegistries.OnDataRemoved += OnScopedRegistryRemoved;
+
+
             OrgLogoController = new FileDataUIController(OrgLogo);
             OrgLogoController.Bind(null);
             Error = null;
             IsLoading = false;
             RegistryButton.style.display = DisplayStyle.None;
+        }
+
+        protected override void OnDisposed()
+        {
+            base.OnDisposed();
+            PckgsWindow.ScopedRegistries.OnDataAdded -= OnScopedRegistryAdded;
+            PckgsWindow.ScopedRegistries.OnDataRemoved -= OnScopedRegistryRemoved;
+        }
+        private void OnScopedRegistryRemoved(UnityScopedRegistry registry)
+        {
+            RefreshRegistryButtonUI();
+        }
+
+        private void OnScopedRegistryAdded(UnityScopedRegistry registry)
+        {
+            RefreshRegistryButtonUI();
         }
 
         void RefreshRegistryButtonUI()
@@ -202,34 +223,30 @@ namespace Pckgs
             OrgLogoController.Bind(details.OrganizationLogo);
             RefreshRegistryButtonUI();
         }
-
         public string GetExpirationStatus(DateTime targetDateUtc)
         {
-            // Calculate the difference between the target date and the current UTC date
-            TimeSpan timeLeft = targetDateUtc - DateTime.UtcNow;
+            var now = DateTime.UtcNow;
+            var timeLeft = targetDateUtc - now;
 
-            // If the expiration date is in the future
             if (timeLeft > TimeSpan.Zero)
             {
-                // Calculate months and days
-                int monthsLeft = targetDateUtc.Month - DateTime.UtcNow.Month + 12 * (targetDateUtc.Year - DateTime.UtcNow.Year);
-                if (monthsLeft > 0)
+                if (timeLeft.TotalDays >= 30)
                 {
+                    int monthsLeft = (int)(timeLeft.TotalDays / 30);
                     return $"Expires in {monthsLeft} month{(monthsLeft > 1 ? "s" : "")}";
                 }
                 else
                 {
-                    // Calculate remaining days if less than a month
                     int daysLeft = (int)Math.Ceiling(timeLeft.TotalDays);
                     return $"Expires in {daysLeft} day{(daysLeft > 1 ? "s" : "")}";
                 }
             }
             else
             {
-                // If expired, return the expired message
                 return "Expired";
             }
         }
+
     }
 
 }

@@ -1,11 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
-using Tomlyn;
-using Tomlyn.Model;
-using UnityEngine;
 
 namespace Pckgs
 {
@@ -17,14 +11,22 @@ namespace Pckgs
 
         public void Save()
         {
-            var manifest = UnityPackageManifest.LoadManifest();
+            var manifest = ProjectPackageManifest.LoadManifest();
             manifest.ScopedRegistries = Data.ToList();
             manifest.Save();
+        }
+        public void Reload()
+        {
+            var manifest = ProjectPackageManifest.LoadManifest();
+            foreach (var data in Data.ToArray())
+                Remove(data);
+            foreach (var data in manifest.ScopedRegistries)
+                Add(data);
         }
 
         public static UnityScopedRegistryCollection Load()
         {
-            return new UnityScopedRegistryCollection(UnityPackageManifest.LoadManifest().ScopedRegistries);
+            return new UnityScopedRegistryCollection(ProjectPackageManifest.LoadManifest().ScopedRegistries);
         }
 
 
