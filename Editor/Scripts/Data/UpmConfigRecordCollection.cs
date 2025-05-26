@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Tomlyn;
 using Tomlyn.Model;
 using UnityEngine;
@@ -9,7 +10,16 @@ namespace Pckgs
 {
     public class UpmConfigRecordCollection : Collection<UpmConfigRecord>
     {
-        public UpmConfigRecordCollection(IEnumerable<UpmConfigRecord> data) : base(data)
+        public static UpmConfigRecordCollection Instance { get; private set; }
+        public static string UserProfile =>
+         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".upmconfig.toml");
+
+        static UpmConfigRecordCollection()
+        {
+            Instance ??= Load();
+        }
+
+        private UpmConfigRecordCollection(IEnumerable<UpmConfigRecord> data) : base(data)
         {
         }
 
@@ -23,10 +33,30 @@ namespace Pckgs
                 AlwaysAuth = true
             });
         }
-        public static UpmConfigRecordCollection Load()
+
+        public void Reload()
         {
-            string userProfile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".upmconfig.toml");
-            var toml = File.Exists(userProfile) ? File.ReadAllText(userProfile) : null;
+            var collection = Load().Data;
+            foreach (var d in Data.ToArray())
+                Remove(d);
+            foreach (var d in collection)
+                Add(d);
+        }
+
+        private static UpmConfigRecordCollection Load()
+        {
+            if (!File.Exists(UserProfile))
+                return new UpmConfigRecordCollection(new List<UpmConfigRecord>());
+
+            using var stream = new FileStream(
+                            path: UserProfile,
+                            mode: FileMode.Open,
+                            access: FileAccess.Read,
+                            share: FileShare.ReadWrite | FileShare.Delete
+                        );
+
+            using var reader = new StreamReader(stream);
+            var toml = reader.ReadToEnd();
 
             if (!Toml.TryToModel(toml, out TomlTable model, out var diagnostics))
             {
@@ -91,5 +121,6 @@ namespace Pckgs
             string userProfile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".upmconfig.toml");
             File.WriteAllText(userProfile, tomlContent);
         }
+
     }
 }

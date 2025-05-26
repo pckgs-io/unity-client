@@ -1,0 +1,18 @@
+{
+    "name": "Pckgs.UnityClient.Tests",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e40716fe8e189ff468141575a7f726cb"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

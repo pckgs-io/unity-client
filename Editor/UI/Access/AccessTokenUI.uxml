@@ -1,0 +1,27 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Package/Editor/UI/Styles.uss?fileID=7433441132597879392&amp;guid=ed688e8c93991df45aeb5d8b0a87d3b1&amp;type=3#Styles" />
+    <engine:VisualElement class="m" style="flex-grow: 1;">
+        <Pckgs.Spinner name="LoadingIndicator" style="width: 20px; height: 20px; display: none; align-self: center;" />
+        <engine:VisualElement name="ResultView" style="flex-grow: 1;">
+            <engine:VisualElement name="ErrorView" class="p" style="flex-grow: 1; justify-content: space-between; display: none;">
+                <engine:Label name="Error" text="Error" style="color: rgb(255, 0, 0); display: flex; -unity-text-align: middle-center;" />
+                <engine:Button text="Remove Token" name="ErrorRemoveButton" class="destructive round pHalf" style="align-self: center;" />
+            </engine:VisualElement>
+            <engine:VisualElement name="Content" style="flex-grow: 1; flex-direction: column; justify-content: flex-start;">
+                <engine:VisualElement name="Header" style="flex-grow: 0; justify-content: space-between; flex-direction: row;">
+                    <engine:Label text="Label" name="NameLabel" class="h p" style="padding-top: 0; padding-bottom: 0; padding-left: 0; -unity-font-style: bold;" />
+                    <engine:Button text="Remove Token" name="RemoveButton" class="destructive round pHalf" style="align-self: center;" />
+                </engine:VisualElement>
+                <engine:VisualElement name="Info" class="p" style="flex-grow: 0; flex-direction: row; align-items: stretch; display: flex; justify-content: space-between; padding-right: 0; padding-left: 0;">
+                    <engine:Label text="No Expiration" name="CreatedAtLabel" class="small-text" />
+                    <engine:Label text="No Expiration" name="ExpirationLabel" class="small-text" />
+                </engine:VisualElement>
+                <engine:VisualElement name="Accesses" style="flex-grow: 1; flex-direction: column;">
+                    <engine:Label text="Organization Accesses" class="p" style="-unity-text-align: middle-left; -unity-font-style: bold; padding-left: 0; padding-right: 0; padding-top: 0;" />
+                    <engine:ScrollView name="OrganizationAccessList" />
+                    <engine:Label text="No access found" name="NoAccessLabel" style="align-self: center;" />
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

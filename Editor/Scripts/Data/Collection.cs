@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Pckgs
 {
-    public class Collection<T>
+    public abstract class Collection<T>
     {
         private readonly List<T> list = new();
 
@@ -28,5 +28,8 @@ namespace Pckgs
             if (list.Remove(item))
                 OnDataRemoved?.Invoke(item);
         }
+
+
+
     }
 }

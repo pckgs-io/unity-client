@@ -1,0 +1,14 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Package/Editor/UI/Styles.uss?fileID=7433441132597879392&amp;guid=ed688e8c93991df45aeb5d8b0a87d3b1&amp;type=3#Styles" />
+    <engine:VisualElement name="Content" class="round pHalf" style="flex-grow: 0; flex-direction: row; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(77, 77, 77); border-right-color: rgb(77, 77, 77); border-top-color: rgb(77, 77, 77); border-bottom-color: rgb(77, 77, 77); margin-top: 2px; margin-right: 2px; margin-bottom: 2px; margin-left: 2px; align-items: center;">
+        <engine:VisualElement name="PackageContent" style="flex-grow: 1; flex-direction: column; align-items: flex-start; display: flex; justify-content: space-between; align-self: flex-start;">
+            <engine:Label text="&lt;u&gt;&lt;Name&gt;&lt;/u&gt;" name="NameLabel" class="p" style="padding-top: 0; padding-bottom: 0; padding-left: 0;" />
+            <engine:Label text="Installed" name="InstallTypeLabel" class="small-text pHalf" style="-unity-text-align: middle-left; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+        </engine:VisualElement>
+        <engine:DropdownField name="VersionDropdown" class="p" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; height: 30px; padding-top: 0; padding-bottom: 0; padding-left: 0;" />
+        <engine:VisualElement name="Actions" style="flex-grow: 0; justify-content: center;">
+            <engine:Button text="Install" name="InstallButton" class="pHalf" style="align-self: center; display: flex;" />
+            <engine:Button text="Remove" name="RemoveButton" class="pHalf" style="align-self: center; display: none;" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Pckgs
 {
@@ -11,6 +12,13 @@ namespace Pckgs
         public List<UnityPackageRelease> Releases { get; set; }
         public DateTime CreatedAt { get; set; }
         public string CreatedBy { get; set; }
+        public bool IsPublic { get; set; }
         public List<UserRef> Contributors { get; set; }
+
+        public UnityPackageRelease GetLatestRelease()
+        {
+            return Releases.OrderByDescending(r => r.CreatedAt).FirstOrDefault();
+
+        }
     }
 }

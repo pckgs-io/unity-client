@@ -11,7 +11,7 @@ namespace Pckgs
         {
             Target.style.backgroundImage = null;
             Target.style.display = obj != null ? DisplayStyle.Flex : DisplayStyle.None;
-            var texture = await PckgsApi.GetTextureFile(obj);
+            var texture = await new PckgsApi().FilesApi.GetTextureFile(obj);
             Target.style.backgroundImage = texture;
         }
     }

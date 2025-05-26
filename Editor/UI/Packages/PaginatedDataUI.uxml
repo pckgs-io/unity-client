@@ -1,0 +1,13 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Package/Editor/UI/Styles.uss?fileID=7433441132597879392&amp;guid=ed688e8c93991df45aeb5d8b0a87d3b1&amp;type=3#Styles" />
+    <engine:VisualElement name="NoContent" style="flex-grow: 1; justify-content: center; align-items: center; display: none;">
+        <engine:Label text="No Package Found" name="NoContentLabel" class="p" style="align-self: center; display: flex; justify-content: center;" />
+    </engine:VisualElement>
+    <engine:VisualElement name="Content" class="p" style="flex-grow: 1; padding-right: 0; padding-left: 0;">
+        <engine:Label text="&lt;Count&gt;" name="CountLabel" class="small-text" style="-unity-text-align: middle-center;" />
+        <engine:VisualElement class="p" style="flex-grow: 1; padding-right: 0; padding-left: 0;">
+            <engine:ScrollView name="List" style="padding-bottom: 0; padding-right: 0; padding-left: 0;" />
+        </engine:VisualElement>
+        <engine:VisualElement name="Pagination" style="flex-grow: 0; flex-direction: row; justify-content: center; align-items: center;" />
+    </engine:VisualElement>
+</engine:UXML>
