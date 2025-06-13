@@ -3,8 +3,14 @@ namespace Pckgs
     public class Routes
     {
         public static string PackagePrefix = "pckgs.io";
+
+#if PCKGS_IO_LOCAL
         public static string Backend = "http://localhost:5000";
         public static string Website = "http://localhost:5173";
+#else
+        public static string Backend = "https://registry.pckgs.io";
+        public static string Website = "https://pckgs.io";
+#endif
 
         public static string AccessDashboardLink => $"{Website}/access-tokens";
         public static string UnityRegistry => $"{Backend}/upm";

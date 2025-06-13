@@ -90,6 +90,7 @@ namespace Pckgs
             if (token == null)
             {
                 var dialog = PckgsWindow.ShowPopup<BoolDialogUIController>(PckgsWindow.BoolDialogUIAsset);
+
                 dialog.Header = "No Access Token";
                 dialog.Description = $"No access token found on this machine to upload the package.\n\nGenerate one from the dashboard and add it on access panel to continue";
                 dialog.NegativeButton.style.display = DisplayStyle.None;
@@ -103,14 +104,21 @@ namespace Pckgs
             uploadDialog.Description = $"Do you want to upload <b>{Package.Metadata.Name}@{Package.Metadata.Version}</b> to organization <b>{orgSlug}</b>?";
             uploadDialog.NegativeButton.text = "Cancel";
             uploadDialog.PositiveButton.text = "Upload";
+
+
+            var visibilityToggle = new Toggle();
+            uploadDialog.Content.Add(visibilityToggle);
+            visibilityToggle.label = "Upload package as private";
+            visibilityToggle.style.alignSelf = Align.Center;
+
             uploadDialog.OnResult += (r) =>
             {
                 if (r.HasValue && r.Value)
-                    UploadTo(Package);
+                    UploadTo(Package, !visibilityToggle.value);
             };
         }
 
-        async void UploadTo(ProjectPackage package)
+        async void UploadTo(ProjectPackage package, bool isPublic)
         {
             IsUploading = true;
 
@@ -119,20 +127,8 @@ namespace Pckgs
                 var inputFolder = Path.GetDirectoryName(package.FullPath);
                 var packageJsonFile = Path.Combine(inputFolder, "package.json");
 
-                var request = UnityEditor.PackageManager.Client.Pack(inputFolder, Application.temporaryCachePath);
+                var outputFile = await PackageManagerHelper.Pack(inputFolder, Application.temporaryCachePath);
 
-                while (request.Status == UnityEditor.PackageManager.StatusCode.InProgress)
-                {
-                    //wait
-                }
-
-                if (request.Status == UnityEditor.PackageManager.StatusCode.Failure)
-                {
-                    Debug.LogError(request.Error.message);
-                    return;
-                }
-
-                var outputFile = request.Result.tarballPath;
                 var tarball = File.ReadAllBytes(outputFile);
                 var metadata = File.ReadAllText(packageJsonFile);
 
@@ -140,7 +136,7 @@ namespace Pckgs
                 try
                 {
                     var api = new PckgsApi();
-                    var unityPackage = await api.Packages.PublishPackage(metadata, tarball);
+                    var unityPackage = await api.Packages.PublishPackage(metadata, tarball, isPublic);
                     Debug.Log("Published " + unityPackage.Name);
                 }
                 finally

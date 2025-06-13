@@ -71,6 +71,31 @@ namespace Pckgs
             await completion.Task;
         }
 
+        public static Task<string> Pack(string inputFolder, string targetFolder)
+        {
+            var completion = new TaskCompletionSource<string>();
+            var req = UnityEditor.PackageManager.Client.Pack(inputFolder, targetFolder);
+            var callback = default(EditorApplication.CallbackFunction);
+            callback = () =>
+            {
+                switch (req.Status)
+                {
+                    case UnityEditor.PackageManager.StatusCode.InProgress:
+                        return;
+                    case UnityEditor.PackageManager.StatusCode.Success:
+                        EditorApplication.update -= callback;
+                        completion.SetResult(req.Result.tarballPath);
+                        break;
+                    case UnityEditor.PackageManager.StatusCode.Failure:
+                        EditorApplication.update -= callback;
+                        completion.SetException(new Exception(req.Error.message));
+                        break;
+                }
+            };
+            EditorApplication.update += callback;
+            return completion.Task;
+        }
+
         public static void Resolve()
         {
             UnityEditor.PackageManager.Client.Resolve();

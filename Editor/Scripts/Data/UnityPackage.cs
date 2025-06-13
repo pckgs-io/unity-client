@@ -13,6 +13,7 @@ namespace Pckgs
         public DateTime CreatedAt { get; set; }
         public string CreatedBy { get; set; }
         public bool IsPublic { get; set; }
+        public bool IsLocked { get; set; }
         public List<UserRef> Contributors { get; set; }
 
         public UnityPackageRelease GetLatestRelease()

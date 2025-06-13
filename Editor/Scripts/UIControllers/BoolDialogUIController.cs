@@ -11,6 +11,7 @@ namespace Pckgs
         public VisualElement ActionSpacing { get; private set; }
         public Button NegativeButton { get; private set; }
         public Button PositiveButton { get; private set; }
+        public VisualElement Content { get; private set; }
 
         public event Action<bool?> OnResult;
 
@@ -32,6 +33,8 @@ namespace Pckgs
             ActionSpacing = target.Q<VisualElement>("ActionSpacing");
             NegativeButton = target.Q<Button>("NegativeButton");
             PositiveButton = target.Q<Button>("PositiveButton");
+            Content = target.Q<VisualElement>("Content");
+
             NegativeButton.clicked += () =>
             {
                 OnResult?.Invoke(false);

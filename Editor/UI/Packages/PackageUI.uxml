@@ -6,9 +6,13 @@
             <engine:Label text="Installed" name="InstallTypeLabel" class="small-text pHalf" style="-unity-text-align: middle-left; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
         </engine:VisualElement>
         <engine:DropdownField name="VersionDropdown" class="p" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; height: 30px; padding-top: 0; padding-bottom: 0; padding-left: 0;" />
-        <engine:VisualElement name="Actions" style="flex-grow: 0; justify-content: center;">
-            <engine:Button text="Install" name="InstallButton" class="pHalf" style="align-self: center; display: flex;" />
+        <engine:VisualElement name="Actions" style="flex-grow: 0; justify-content: center; display: flex;">
+            <engine:VisualElement name="InstallSection" style="flex-grow: 1; align-items: center; justify-content: center;">
+                <engine:Button text="Install" name="InstallButton" class="pHalf" style="align-self: center; display: flex;" />
+                <engine:Label text="Locked" name="LockedLabel" />
+            </engine:VisualElement>
             <engine:Button text="Remove" name="RemoveButton" class="pHalf" style="align-self: center; display: none;" />
         </engine:VisualElement>
+        <Pckgs.Spinner name="Spinner" style="scale: 0.5 0.5;" />
     </engine:VisualElement>
 </engine:UXML>

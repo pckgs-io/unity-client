@@ -15,11 +15,12 @@ namespace Pckgs
         {
         }
 
-        public async Task<UnityPackage> PublishPackage(string metadata, byte[] tarball)
+        public async Task<UnityPackage> PublishPackage(string metadata, byte[] tarball, bool isPublic)
         {
             var form = new WWWForm();
             form.AddField("metadata", metadata);
             form.AddBinaryData("packageFile", tarball, "package.tgz", "application/gzip");
+            form.AddField("isPublic", isPublic.ToString());
 
             var request = UnityWebRequest.Post(EndPoint, form);
             return await Request<UnityPackage>(request);

@@ -4,7 +4,7 @@
         <engine:Label text="&lt;Header&gt;" name="HeaderLabel" class="h2" style="-unity-text-align: upper-center;" />
         <engine:VisualElement name="Separator" class="m" style="flex-grow: 1; height: 1px; background-color: rgb(84, 84, 84); margin-right: 0; margin-left: 0;" />
         <engine:Label text="&lt;Description&gt;" name="DescriptionLabel" style="-unity-text-align: upper-center;" />
-        <engine:VisualElement name="Separator" class="m" style="flex-grow: 1; height: 1px; background-color: rgb(84, 84, 84); margin-right: 0; margin-left: 0; visibility: hidden;" />
+        <engine:VisualElement name="Content" class="p" style="flex-grow: 1; padding-right: 0; padding-left: 0;" />
         <engine:VisualElement name="Actions" style="flex-grow: 1; justify-content: space-between; flex-direction: row; align-content: auto; align-items: stretch;">
             <engine:Button text="&lt;Negative&gt;" name="NegativeButton" style="flex-grow: 1; display: flex; align-self: stretch; white-space: normal;" />
             <engine:VisualElement name="ActionSpacing" class="pHalf" style="flex-grow: 0; display: flex;" />

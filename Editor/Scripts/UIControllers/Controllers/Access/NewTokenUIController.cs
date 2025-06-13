@@ -67,7 +67,8 @@ namespace Pckgs
                     Error = "Token is required";
                     return;
                 }
-                if (PckgsWindow.UpmConfigs.Data.Any(c => c.Token == tokenInput))
+
+                if (PckgsWindow.UpmConfigs.Data.Any(c => c.Token == tokenInput && c.EndPoint == Routes.UnityRegistry))
                 {
                     Error = "Token is already added";
                     return;

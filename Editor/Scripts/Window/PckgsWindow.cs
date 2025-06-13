@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Linq;
 using UnityEditor;
@@ -78,6 +77,7 @@ namespace Pckgs
         {
             var instance = Instance;
         }
+
         public void CreateGUI()
         {
             if (windowUIAsset == null)
