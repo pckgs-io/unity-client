@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using UnityEngine;
+using UnityEngine.TextCore;
 using UnityEngine.UIElements;
 
 namespace Pckgs
@@ -75,17 +76,6 @@ namespace Pckgs
             Error = null;
             IsUploading = false;
 
-            string orgSlug;
-            try
-            {
-                orgSlug = Package.Metadata.Name.Replace("com.", "").Split('.', StringSplitOptions.RemoveEmptyEntries)[0];
-            }
-            catch
-            {
-                Debug.LogError($"{Package.Metadata.Name} is invalid");
-                return;
-            }
-
             var token = PckgsWindow.AccessToken;
             if (token == null)
             {
@@ -99,23 +89,13 @@ namespace Pckgs
                 return;
             }
 
-            var uploadDialog = PckgsWindow.ShowPopup<BoolDialogUIController>(PckgsWindow.BoolDialogUIAsset);
-            uploadDialog.Header = $"Upload {Package.Metadata.Name}";
-            uploadDialog.Description = $"Do you want to upload <b>{Package.Metadata.Name}@{Package.Metadata.Version}</b> to organization <b>{orgSlug}</b>?";
-            uploadDialog.NegativeButton.text = "Cancel";
-            uploadDialog.PositiveButton.text = "Upload";
-
-
-            var visibilityToggle = new Toggle();
-            uploadDialog.Content.Add(visibilityToggle);
-            visibilityToggle.label = "Upload package as private";
-            visibilityToggle.style.alignSelf = Align.Center;
-
+            var uploadDialog = PckgsWindow.ShowPopup<UploadPackageDialogUIController>(PckgsWindow.UploadPackageDialogUIAsset);
             uploadDialog.OnResult += (r) =>
             {
                 if (r.HasValue && r.Value)
-                    UploadTo(Package, !visibilityToggle.value);
+                    UploadTo(Package, uploadDialog.VisibilityDropdown.value == "Public");
             };
+            uploadDialog.Bind(Package);
         }
 
         async void UploadTo(ProjectPackage package, bool isPublic)

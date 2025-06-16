@@ -2,13 +2,13 @@
 
 This Unity Editor UI client provides seamless integration with pckgs.io. It enables you to easily access pckgs.io, manage your access tokens, and effortlessly upload and download packages.
 
-After importing the package to Unity Editor, simply go to `Window/pckgs.io` to start using it.
+After importing the package to Unity Editor, simply go to **Window > pckgs.io** to start using it.
 
 ## How to Import
 
 This package can be easily imported into your Unity Editor using its Git URL. Follow these steps:
 
-1.  **Open Package Manager:** In your Unity Editor, go to `Window > Package Manager`.
+1.  **Open Package Manager:** In your Unity Editor, go to **Window > Package Manager**.
 2.  **Add package from Git URL:** Click the `+` (plus) button in the top-left corner of the Package Manager window.
 3.  **Select "Add package from Git URL...".**
 4.  **Enter the URL:** Paste the following URL into the text field and click "Add":

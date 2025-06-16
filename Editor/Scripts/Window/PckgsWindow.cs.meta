@@ -14,6 +14,7 @@ MonoImporter:
   - newTokenUIAsset: {fileID: 9197481963319205126, guid: 76f90d5167a86fb418353f936b9c6951, type: 3}
   - uploadUIAsset: {fileID: 9197481963319205126, guid: b59366ca41b6616409b8e65613d87c52, type: 3}
   - projectPackageUIAsset: {fileID: 9197481963319205126, guid: bfcf2008a88195d42b78360d3969b8f1, type: 3}
+  - uploadPackageDialogUIAsset: {fileID: 9197481963319205126, guid: c0e677c897b97134082cbf7903068c7d, type: 3}
   - packagesUIAsset: {fileID: 9197481963319205126, guid: a02917ae17ddb7b4f9aae89bf7c3e279, type: 3}
   - searchPackagesUIAsset: {fileID: 9197481963319205126, guid: a02917ae17ddb7b4f9aae89bf7c3e279, type: 3}
   - packageUIAsset: {fileID: 9197481963319205126, guid: 0e37f758df08ebe48af7ebcbf2cf3fde, type: 3}

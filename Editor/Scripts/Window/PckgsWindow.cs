@@ -22,6 +22,7 @@ namespace Pckgs
         [Header("Upload")]
         [SerializeField] VisualTreeAsset uploadUIAsset;
         [SerializeField] VisualTreeAsset projectPackageUIAsset;
+        [SerializeField] VisualTreeAsset uploadPackageDialogUIAsset;
 
         [Header("Packages")]
         [SerializeField] VisualTreeAsset packagesUIAsset;
@@ -44,6 +45,8 @@ namespace Pckgs
         public static VisualTreeAsset ProjectPackageUIAsset => Instance.projectPackageUIAsset;
         public static VisualTreeAsset NewTokenUIAsset => Instance.newTokenUIAsset;
         public static VisualTreeAsset BoolDialogUIAsset => Instance.boolDialogUIAsset;
+        public static VisualTreeAsset UploadPackageDialogUIAsset => Instance.uploadPackageDialogUIAsset;
+
         public static VisualTreeAsset PickerUIAsset => Instance.pickerUIAsset;
         public static VisualTreeAsset PickerOptionUIAsset => Instance.pickerOptionUIAsset;
         public static VisualTreeAsset PackagesUIAsset => Instance.packagesUIAsset;

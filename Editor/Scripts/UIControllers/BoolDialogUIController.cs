@@ -25,7 +25,6 @@ namespace Pckgs
             get => DescriptionLabel.text;
             set => DescriptionLabel.text = value;
         }
-
         public BoolDialogUIController(VisualElement target) : base(target)
         {
             HeaderLabel = target.Q<Label>("HeaderLabel");
